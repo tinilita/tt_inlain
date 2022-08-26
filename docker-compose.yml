@@ -1,0 +1,41 @@
+---
+version: '3.8'
+services:
+  php-cli:
+    container_name: php-cli
+    build:
+      context: ./docker
+      dockerfile: php-cli.docker
+    links:
+      - mysql
+    volumes:
+      - ./tt_inlain:/tt_inlain
+
+  php-fpm:
+    build:
+      context: ./docker
+      dockerfile: php-fpm.docker
+    container_name: php-fpm
+    expose:
+      - '9000'
+    links:
+      - mysql
+    volumes:
+      - ./tt_inlain:/tt_inlain
+  mysql:
+    image: mysql:8.0
+    platform: linux/amd64
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '127.0.0.1:3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+volumes:
+  mysql-data:
+...
