@@ -1,3 +1,3 @@
 # tt_inline .gitignore file
-/.idea
-vendor
+www/.idea
+www/vendor
