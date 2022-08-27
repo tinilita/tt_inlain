@@ -2,24 +2,66 @@
 
 declare(strict_types=1);
 
-//подключение к БД через PDO
-$dsn = 'mysql:host=mysql;dbname=db;charset=UTF8';
-$user = 'user';
-$password = 'password';
+$servername = "127.0.0.1";
+$username = "user";
+$password = "password";
 
+try {
+$connect = new PDO("mysql:host=$servername;dbname=db", $username, $password);
+$connect ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connected successfully";
+} catch(PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+
+$query = '';
+
+$table_data = '';
+
+// json file name
 $url = 'https://jsonplaceholder.typicode.com/posts';
-//read the json file contents
+
+// Read the JSON file in PHP
 $jsondata_stati= file_get_contents($url);
 
-//convert json object to php associative array
-$data = json_decode($jsondata_stati, true);
 
-//get the details
-$userId = $data['userId'];
-$id = $data['id'];
-$title = $data['title'];
-$body = $data['body'];
+// Convert the JSON String into PHP Array
 
-//insert into mysql table
-$sql = "INSERT INTO zapis(userId, id, title, body)
-    VALUES('$userId', '$id', '$title', '$body')";
+$array = json_decode($jsondata_stati, true);
+
+
+
+// Extracting row by row
+
+foreach($array as $row) {
+
+    // Database query to insert data
+
+    // into database Make Multiple
+
+    // Insert Query
+
+    $query .=
+
+        "INSERT INTO zapis VALUES
+                      ('".$row["userId"]."', '".$row["id"]."', '".$row["title"]."', '".$row["body"]."'); ";
+    $table_data .= ' 
+
+                <tr> 
+
+                    <td>'.$row["userId"].'</td> 
+
+                    <td>'.$row["id"].'</td> 
+
+                    <td>'.$row["title"].'</td>
+                    
+                    <td>'.$row["body"].'</td> 
+
+                </tr> 
+
+                ';}
+//$stmt = $connect->prepare($query);
+
+
+
+
