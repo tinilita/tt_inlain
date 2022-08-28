@@ -73,7 +73,7 @@ require 'script.php';
 
     echo $table_data;
 
-    if(mysqli_multi_query($connect, $query)) {
+   /* if(mysqli_multi_query($connect, $query)) {
 
         echo '<h3>Inserted JSON Data</h3><br />';
 
@@ -89,7 +89,7 @@ require 'script.php';
 
                     <th width="45%">Subject</th>
                     
-                    <th width="45%">Subject</th> 
+                    <th width="45%">Subject</th>
 
                 </tr> 
 
@@ -100,7 +100,7 @@ require 'script.php';
         echo '</table>';
 
     }
-
+*/
     ?>
 
     <br />

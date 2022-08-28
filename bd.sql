@@ -2,13 +2,13 @@ CREATE TABLE zapis
 (
     userId INT,
     id INT,
-    title varchar(20) not null,
-    body varchar(20) not null
+    title text NOT NULL,
+    body text NOT NULL
 );
-
+DROP TABLE zapis;
 INSERT INTO `zapis` (userId, id, title, body) VALUE -- тест
-    (3, 1, 'Kassy', 'title_is', 'test'),
-    (4, 2, 'lili', 'title_is', 'test');
+    (3, 1, 'title_is', 'test'),
+    (4, 2, 'title_is', 'test');
 
 CREATE TABLE comment
 (
