@@ -14,11 +14,11 @@ CREATE TABLE comment
 (
     postId INT,
     id INT,
-    name varchar(20) not null,
-    email varchar(20) not null,
-    body varchar(20) not null
+    name text NOT NULL,
+    email text NOT NULL,
+    body text NOT NULL
 );
-
+DROP TABLE comment;
 ALTER USER 'user'@'127.0.0.1' IDENTIFIED WITH mysql_native_password BY 'password';
 
 GRANT ALL PRIVILEGES ON *.* TO 'user'@'127.0.0.1' WITH GRANT OPTION;
@@ -55,3 +55,9 @@ UPDATE mysql.user SET password=password('password')
 WHERE user='user' AND host='localhost';
 
 USE db;
+
+SELECT title, comment.body
+FROM zapis
+         LEFT JOIN comment
+                   ON zapis.id =comment.postId
+WHERE comment.body LIKE '%in%';
